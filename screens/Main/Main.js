@@ -4,6 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import useTheme from '../../hooks/useTheme';
+import { NavigationContainer } from '@react-navigation/native';
 
 const Drawer = createDrawerNavigator();
 const { font_color } = useTheme();
@@ -24,7 +25,7 @@ const MainScreen = ({ navigation }) => {
       }}
       >
         <TouchableOpacity style={styles.iconButton}
-        onPress={() => navigation.openDrawer()}
+        onPress={() => Drawer.openDrawer()}
         >
           <MaterialCommunityIcons
             name="menu"

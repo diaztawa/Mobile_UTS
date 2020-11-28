@@ -23,9 +23,14 @@ const styles = StyleSheet.create({
   coverText: {
     fontWeight: 'bold',
     marginBottom: 8,
-    paddingHorizontal: 8,
+    paddingHorizontal: '10%',
     fontSize: font_size.size.sm,
   },
+  mangaCover: {
+    width: 140,
+    height: 200,
+    resizeMode: 'cover',
+  }
 });
 
 const MangaItem = ({ navigation }) => (
@@ -36,11 +41,7 @@ const MangaItem = ({ navigation }) => (
       onPress={() => navigation.navigate('Details')}
     >
       <Image
-        style={{
-          width: 140,
-          height: 200,
-          resizeMode: 'cover',
-        }}
+        style={styles.mangaCover}
         source={cover}
       />
       <Text style={styles.coverText}>World Without Blessings</Text>
@@ -51,11 +52,7 @@ const MangaItem = ({ navigation }) => (
       onPress={() => navigation.navigate('Details')}
     >
       <Image
-        style={{
-          width: 140,
-          height: 200,
-          resizeMode: 'cover',
-        }}
+        style={styles.mangaCover}
         source={cover}
       />
       <Text style={styles.coverText}>World Without Blessings</Text>
