@@ -40,7 +40,6 @@ const MainScreen = ({ navigation }) => {
             style={{ color: font_color.common.white }}
           />
         </TouchableOpacity>
-        <MyDrawer/>
       </View>
 
     return(
