@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: font_color.primary.main,
-    borderRadius: radius.pills,
+    borderRadius: radius.pil,
     padding: 16,
     alignItems: 'center',
   },
@@ -64,79 +64,86 @@ const LoginScreen = ({ navigation }) => {
       setAlert(true);
       return;
     }
-    navigation.navigate('Login');
+    navigation.navigate('Main');
   };
 
   return(
     <View style={styles.container}>
+
       <ImageBackground source={bg1} style={styles.backgroundImage}>
         <View style={{
           paddingHorizontal: 24,
           paddingTop: Constants.statusBarHeight,
         }}
         >
-        <View style={[styles.centered, { marginTop: 15 }]}>
-          <Image
-            style={styles.logo}
-            source={logo}
-          />
-        </View>
-        <View style={[styles.centered, { marginTop: 12 }]}>
-          <Text style={styles.title}>
-            KoMBatch Login
-          </Text>
-        </View>
-        {alert ? (
-          <View style={styles.alert}>
-            <Text style={{ color: font_color.common.white }}>
-              Username dan password tidak boleh kosong!
+
+          <View style={[styles.centered, { marginTop: 15 }]}>
+            <Image
+              style={styles.logo}
+              source={logo}
+            />
+          </View>
+
+          <View style={[styles.centered, { marginTop: 12 }]}>
+            <Text style={styles.title}>
+              KoMBatch Login
             </Text>
           </View>
-        ) : null}
-        <View>
-          <TextInput
-            value={user}
-            onChangeText={(text) => setUser(text)}
-            type="text"
-            placeholder="Masukkan Username"
-            style={[styles.input, { marginBottom: 8 }]}
-          />
-          <TextInput
-            secureTextEntry={!shown}
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-            textContentType="password"
-            placeholder="Password"
-            style={styles.input}
-          />
-          <TouchableOpacity
-            style={{ marginTop: 8, marginBottom: 24 }}
-            onPress={() => setShown(!shown)}
-          >
-            <Text style={{ color: font_color.text.secondary }}>
-              {shown ? 'Hide' : 'Show'}
-              {' '}
-              password
+
+          {alert ? (
+            <View style={styles.alert}>
+              <Text style={{ color: font_color.common.white }}>
+                Username dan password tidak boleh kosong!
+              </Text>
+            </View>
+          ) : null}
+
+          <View>
+            <TextInput
+              value={user}
+              onChangeText={(text) => setUser(text)}
+              type="text"
+              placeholder="Masukkan Username"
+              style={[styles.input, { marginBottom: 8 }]}
+            />
+            <TextInput
+              secureTextEntry={!shown}
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+              textContentType="password"
+              placeholder="Password"
+              style={styles.input}
+            />
+            <TouchableOpacity
+              style={{ marginTop: 8, marginBottom: 24 }}
+              onPress={() => setShown(!shown)}
+            >
+              <Text style={{ color: font_color.text.secondary }}>
+                {shown ? 'Hide' : 'Show'}
+                {' '}
+                password
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={AlertLogic}
+            >
+              <Text style={{ color: font_color.common.white }}>Login</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={[styles.centered, styles.row]}>
+            <Text style={{ color: font_color.text.primary }}>
+              Belum punya akun?
             </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={AlertLogic}
-          >
-            <Text style={{ color: font_color.common.white }}>Login</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={[styles.centered, styles.row]}>
-          <Text style={{ color: font_color.text.primary }}>
-            Belum punya akun?
-          </Text>
-          <TouchableOpacity
-            style={{ marginLeft: 4 }}
-            onPress={() => navigation.navigate('Register')}
-          >
-            <Text style={{ color: font_color.primary.main }}>Daftar sekarang!</Text>
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              style={{ marginLeft: 4 }}
+              onPress={() => navigation.navigate('Register')}
+            >
+              <Text style={{ color: font_color.primary.main }}>Daftar sekarang!</Text>
+            </TouchableOpacity>
+          </View>
+
         </View>
       </ImageBackground>
     </View>

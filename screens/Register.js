@@ -69,61 +69,67 @@ const RegisterScreen = ({ navigation }) => {
 
   return(
     <View style={styles.container}>
+
       <ImageBackground source={bg1} style={styles.backgroundImage}>
         <View style={{
           paddingHorizontal: 24,
           paddingTop: Constants.statusBarHeight,
         }}
         >
-        <View style={[styles.centered, { marginTop: 15 }]}>
-          <Image
-            style={styles.logo}
-            source={logo}
-          />
-        </View>
-        <View style={[styles.centered, { marginTop: 12 }]}>
-          <Text style={styles.title}>
-            KoMBatch Login
-          </Text>
-        </View>
-        {alert ? (
-          <View style={styles.alert}>
-            <Text style={{ color: font_color.common.white }}>
-              Username dan password tidak boleh kosong, konfirmasi password tidak boleh berbeda
+
+          <View style={[styles.centered, { marginTop: 15 }]}>
+            <Image
+              style={styles.logo}
+              source={logo}
+            />
+          </View>
+
+          <View style={[styles.centered, { marginTop: 12 }]}>
+            <Text style={styles.title}>
+              KoMBatch Login
             </Text>
           </View>
-        ) : null}
-        <View>
-          <TextInput
-            value={user}
-            onChangeText={(text) => setUser(text)}
-            type="text"
-            placeholder="Masukkan Username"
-            style={[styles.input, { marginBottom: 8 }]}
-          />
-          <TextInput
-            secureTextEntry
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-            textContentType="password"
-            placeholder="Password"
-            style={[styles.input, { marginBottom: 8 }]}
-          />
-          <TextInput
-            secureTextEntry
-            value={confirm}
-            onChangeText={(text) => setConfirm(text)}
-            textContentType="password"
-            placeholder="Confirm Password"
-            style={[styles.input, { marginBottom: 8 }]}
-          />
-          <TouchableOpacity
-            style={styles.button}
-            onPress={AlertLogic}
-          >
-            <Text style={{ color: font_color.common.white }}>Register Now</Text>
-          </TouchableOpacity>
-        </View>
+          
+          {alert ? (
+            <View style={styles.alert}>
+              <Text style={{ color: font_color.common.white }}>
+                Username dan password tidak boleh kosong, konfirmasi password tidak boleh berbeda
+              </Text>
+            </View>
+          ) : null}
+
+          <View>
+            <TextInput
+              value={user}
+              onChangeText={(text) => setUser(text)}
+              type="text"
+              placeholder="Masukkan Username"
+              style={[styles.input, { marginBottom: 8 }]}
+            />
+            <TextInput
+              secureTextEntry
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+              textContentType="password"
+              placeholder="Password"
+              style={[styles.input, { marginBottom: 8 }]}
+            />
+            <TextInput
+              secureTextEntry
+              value={confirm}
+              onChangeText={(text) => setConfirm(text)}
+              textContentType="password"
+              placeholder="Confirm Password"
+              style={[styles.input, { marginBottom: 8 }]}
+            />
+            <TouchableOpacity
+              style={styles.button}
+              onPress={AlertLogic}
+            >
+              <Text style={{ color: font_color.common.white }}>Register Now</Text>
+            </TouchableOpacity>
+          </View>
+
         </View>
       </ImageBackground>
     </View>
