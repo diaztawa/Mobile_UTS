@@ -4,6 +4,7 @@ import Constants from 'expo-constants';
 import useTheme from '../hooks/useTheme';
 import logo from '../assets/images/logo/mascot_logo.png';
 import bg1 from '../assets/images/background/bg1.png';
+import AuthContext from '../context/AuthContext';
 
 const { font_color, font_size, radius } = useTheme();
 
@@ -53,19 +54,35 @@ const styles = StyleSheet.create({
   },
 });
 
-const RegisterScreen = ({ navigation }) => {
-  const [user, setUser] = React.useState('');
+export default function RegisterScreen() {
+  const {register} = React.useContext(AuthContext);
+  const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [confirm, setConfirm] = React.useState('');
-  const [alert, setAlert] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
-  const AlertLogic = () => {
-    if (user === '' && password === '') {
-      setAlert(true);
-      return;
+  // const AlertLogic = () => {
+  //   if (user === '' && password === '') {
+  //     setAlert(true);
+  //     return;
+  //   }
+  //   navigation.navigate('Login');
+  // };
+
+  async function RegisterLogic() {
+    setLoading(true);
+    try {
+      if (confirm !== password) {
+        setError(true);
+      } else {
+        await register({email, password});
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
     }
-    navigation.navigate('Login');
-  };
+  }
 
   return(
     <View style={styles.container}>
@@ -90,19 +107,19 @@ const RegisterScreen = ({ navigation }) => {
             </Text>
           </View>
           
-          {alert ? (
+          {/* {alert ? (
             <View style={styles.alert}>
               <Text style={{ color: font_color.common.white }}>
                 Username dan password tidak boleh kosong, konfirmasi password tidak boleh berbeda
               </Text>
             </View>
-          ) : null}
+          ) : null} */}
 
           <View>
             <TextInput
-              value={user}
-              onChangeText={(text) => setUser(text)}
-              type="text"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+              type="email"
               placeholder="Masukkan Username"
               style={[styles.input, { marginBottom: 8 }]}
             />
@@ -123,8 +140,9 @@ const RegisterScreen = ({ navigation }) => {
               style={[styles.input, { marginBottom: 8 }]}
             />
             <TouchableOpacity
+              loading={loading}
               style={styles.button}
-              onPress={AlertLogic}
+              onPress={RegisterLogic}
             >
               <Text style={{ color: font_color.common.white }}>Register Now</Text>
             </TouchableOpacity>
@@ -135,5 +153,3 @@ const RegisterScreen = ({ navigation }) => {
     </View>
   );
 };
-
-export default RegisterScreen;

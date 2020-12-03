@@ -4,6 +4,8 @@ import Constants from 'expo-constants';
 import useTheme from '../hooks/useTheme';
 import logo from '../assets/images/logo/mascot_logo.png';
 import bg1 from '../assets/images/background/bg1.png';
+import AuthContext from '../context/AuthContext';
+
 
 const { font_color, font_size, radius } = useTheme();
 
@@ -53,19 +55,34 @@ const styles = StyleSheet.create({
   },
 });
 
-const LoginScreen = ({ navigation }) => {
-  const [user, setUser] = React.useState('');
+export default function LoginScreen({navigation}) {
+  const {login} = React.useContext(AuthContext);
+  const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [shown, setShown] = React.useState(false);
-  const [alert, setAlert] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
-  const AlertLogic = () => {
-    if (user === '' && password === '') {
-      setAlert(true);
-      return;
-    }
-    navigation.navigate('Main');
-  };
+
+  // const AlertLogic = () => {
+  //   if (user === '' && password === '') {
+  //     setAlert(true);
+  //     return;
+  //   }
+  //   navigation.navigate('Main');
+  // };
+
+  async function LoginLogic(){
+    setLoading(true);
+    try{
+      await login({email, password});
+    } 
+      catch (err){
+        console.error(err);
+      }
+      finally{
+        setLoading(false);
+      }
+  }
 
   return(
     <View style={styles.container}>
@@ -90,19 +107,18 @@ const LoginScreen = ({ navigation }) => {
             </Text>
           </View>
 
-          {alert ? (
+          {/* {alert ? (
             <View style={styles.alert}>
               <Text style={{ color: font_color.common.white }}>
                 Username dan password tidak boleh kosong!
               </Text>
             </View>
-          ) : null}
+          ) : null} */}
 
           <View>
             <TextInput
-              value={user}
-              onChangeText={(text) => setUser(text)}
-              type="text"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
               placeholder="Masukkan Username"
               style={[styles.input, { marginBottom: 8 }]}
             />
@@ -126,7 +142,8 @@ const LoginScreen = ({ navigation }) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
-              onPress={AlertLogic}
+              loading = {loading}
+              onPress={LoginLogic}
             >
               <Text style={{ color: font_color.common.white }}>Login</Text>
             </TouchableOpacity>
@@ -149,5 +166,3 @@ const LoginScreen = ({ navigation }) => {
     </View>
   );
 };
-
-export default LoginScreen;
