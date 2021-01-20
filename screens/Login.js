@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
 import Constants from 'expo-constants';
 import useTheme from '../hooks/useTheme';
 import logo from '../assets/images/cover/002.jpg';
@@ -40,11 +40,12 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     fontFamily: 'Roboto',
     borderRadius: radius.pil,
+    fontSize: font_size.size.md
   },
   button: {
     backgroundColor: font_color.primary.main,
     borderRadius: radius.pil,
-    padding: 16,
+    padding: 12,
     alignItems: 'center',
   },
   alert: {
@@ -157,7 +158,7 @@ export default function LoginScreen({navigation}) {
               loading = {loading}
               onPress={LoginLogic}
             >
-              <Text style={{ color: font_color.common.white }}>Login</Text>
+              <Text style={{ color: font_color.common.white, fontSize: font_size.size.md }}>Sign In</Text>
             </TouchableOpacity>
           </View>
 
