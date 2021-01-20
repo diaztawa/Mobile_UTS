@@ -4,6 +4,7 @@ import Constants from 'expo-constants';
 import useTheme from '../hooks/useTheme';
 import logo from '../assets/images/cover/002.jpg';
 import AuthContext from '../context/AuthContext';
+import { StatusBar } from 'expo-status-bar';
 
 
 const { font_color, font_size, radius } = useTheme();
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
   input: {
     borderColor: font_color.common.gray.main,
     borderWidth: 1,
+    backgroundColor: '#dbebfa',
     paddingHorizontal: 16,
     paddingVertical: 8,
     fontFamily: 'Roboto',
@@ -109,17 +111,17 @@ export default function LoginScreen({navigation}) {
             </View>
           </View>
 
+          <View style={[styles.centered, {marginVertical: 10}]}>
+            <Text style={styles.title}>
+              Sign In
+            </Text>
+          </View>
+
         <View style={{
           padding: 24,
           paddingTop: Constants.statusBarHeight,
         }}
         >
-
-          <View style={[styles.centered, {paddingVertical: 5}]}>
-            <Text style={styles.title}>
-              Sign In
-            </Text>
-          </View>
 
           {/* {alert ? (
             <View style={styles.alert}>
@@ -129,12 +131,12 @@ export default function LoginScreen({navigation}) {
             </View>
           ) : null} */}
 
-          <View>
+          <View style={{marginTop: -20}}>
             <TextInput
               value={email}
               onChangeText={(text) => setEmail(text)}
               placeholder="Email"
-              style={[styles.input, { marginBottom: 8 }]}
+              style={[styles.input, { marginBottom: 12 }]}
             />
             <TextInput
               secureTextEntry={!shown}
@@ -145,13 +147,9 @@ export default function LoginScreen({navigation}) {
               style={styles.input}
             />
             <TouchableOpacity
-              style={{ marginTop: 8, marginBottom: 24 }}
-              onPress={() => setShown(!shown)}
-            >
-              <Text style={{ color: font_color.text.secondary }}>
-                {shown ? 'Hide' : 'Show'}
-                {' '}
-                password
+              style={{ marginTop: 8, marginBottom: 20 }}>
+              <Text style={{ color: font_color.text.secondary, textAlign: 'center', fontStyle: 'italic' }}>
+                Forgot password?
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -176,7 +174,7 @@ export default function LoginScreen({navigation}) {
           </View>
 
         </View>
-
+        <StatusBar hidden/>
     </View>
   );
 };
