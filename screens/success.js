@@ -4,14 +4,15 @@ import MainScreen from './Main/Main';
 import { CardStyleInterpolators } from '@react-navigation/stack';
 
 export default [
-  {
-    name: 'Home',
-    component: HomeScreen,
-    options: { headerShown: false },
-  },
+  
   {
     name: 'Main',
     component: MainScreen,
+    options: { headerShown: false },
+  },
+  {
+    name: 'Home',
+    component: HomeScreen,
     options: { headerShown: false },
   },
   {
