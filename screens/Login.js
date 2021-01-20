@@ -2,8 +2,7 @@ import React from 'react';
 import { ImageBackground, StyleSheet, View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
 import Constants from 'expo-constants';
 import useTheme from '../hooks/useTheme';
-import logo from '../assets/images/logo/mascot_logo.png';
-import bg1 from '../assets/images/background/bg1.png';
+import logo from '../assets/images/cover/002.jpg';
 import AuthContext from '../context/AuthContext';
 
 
@@ -19,13 +18,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    width: 212,
-    height: 196,
+    width: '100%',
+    height: '100%',
   },
   title: {
     fontSize: font_size.size.xl,
     fontWeight: 'bold',
-    marginBottom: 4,
   },
   backgroundImage: {
     flex: 1,
@@ -39,7 +37,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     fontFamily: 'Roboto',
-    borderRadius: radius.normal,
+    borderRadius: radius.pil,
   },
   button: {
     backgroundColor: font_color.primary.main,
@@ -53,6 +51,11 @@ const styles = StyleSheet.create({
     borderRadius: radius.normal,
     backgroundColor: font_color.error.main,
   },
+  imageBackground: {
+    width: '100%',
+    height: 75,
+    backgroundColor: font_color.primary.main,
+  }
 });
 
 export default function LoginScreen({navigation}) {
@@ -87,23 +90,34 @@ export default function LoginScreen({navigation}) {
   return(
     <View style={styles.container}>
 
-      <ImageBackground source={bg1} style={styles.backgroundImage}>
-        <View style={{
-          paddingHorizontal: 24,
-          paddingTop: Constants.statusBarHeight,
-        }}
-        >
-
-          <View style={[styles.centered, { marginTop: 15 }]}>
+          <View style={[styles.centered, {height: 300}]}>
             <Image
               style={styles.logo}
               source={logo}
             />
           </View>
 
-          <View style={[styles.centered, { marginTop: 12 }]}>
+          <View style={[styles.imageBackground]}>
+            <View style={{padding: 10, paddingLeft: 15}}>
+            <Text style={[styles.title, {color: font_color.common.white}]}>
+              KoMBatch
+            </Text>
+
+            <Text style={{color: font_color.common.white, fontSize: font_size.size.sm}}>
+              Epic Manga Safehouse
+            </Text>
+            </View>
+          </View>
+
+        <View style={{
+          padding: 24,
+          paddingTop: Constants.statusBarHeight,
+        }}
+        >
+
+          <View style={[styles.centered, {paddingVertical: 5}]}>
             <Text style={styles.title}>
-              KoMBatch Login
+              Sign In
             </Text>
           </View>
 
@@ -119,7 +133,7 @@ export default function LoginScreen({navigation}) {
             <TextInput
               value={email}
               onChangeText={(text) => setEmail(text)}
-              placeholder="Masukkan Username"
+              placeholder="Email"
               style={[styles.input, { marginBottom: 8 }]}
             />
             <TextInput
@@ -162,7 +176,7 @@ export default function LoginScreen({navigation}) {
           </View>
 
         </View>
-      </ImageBackground>
+
     </View>
   );
 };
