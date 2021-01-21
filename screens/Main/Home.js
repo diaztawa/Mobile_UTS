@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
-import { StyleSheet, View, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, ScrollView, TouchableOpacity, Image, Text, Button } from 'react-native';
 import Constants from 'expo-constants';
 import MangaItem from '../../components/MangaItem';
 import useTheme from '../../hooks/useTheme';
@@ -22,13 +22,33 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 100,
   },
+  title: {
+    fontSize: font_size.size.xl,
+    textAlign: 'center',
+    paddingVertical: 25,
+  },
+  buttonWrapper: {
+    alignItems: 'center',
+    marginTop: 7,
+    marginBottom: 5,
+  },
+  button: {
+    backgroundColor: font_color.primary.main,
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    borderRadius: 40
+  },
+  textButton: {
+      color: "#FFFFFF",
+      fontSize: 16,
+  },
 });
 
 const HomeScreen = ({ navigation }) => (
   <View style={styles.container}>
 
-    <View style={{
-      padding: 5,
+<View style={{
+      padding: 10,
       flexDirection: 'row',
       justifyContent: 'space-between',
       backgroundColor: font_color.primary.main,
@@ -53,11 +73,16 @@ const HomeScreen = ({ navigation }) => (
       </TouchableOpacity>
 
     </View>
-
-    <ScrollView style={{ paddingHorizontal: 24 }}>
-      {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+    <ScrollView style={{ paddingHorizontal: 20 }}>
+    <Text style={styles.title}>Update Project</Text>
+      {[1, 2, 3].map((i) => (
         <MangaItem key={i} navigation={navigation} />
       ))}
+    <TouchableOpacity style={styles.buttonWrapper}>
+            <View style={styles.button}>
+            <Text style={styles.textButton}>More</Text>
+            </View>
+      </TouchableOpacity>
     </ScrollView>
 
   </View>

@@ -13,11 +13,18 @@ const MainScreen = () => (
     initialRouteName="Home"
     tabBarOptions={{
       labelStyle: {
-        marginBottom: 6,
+        marginBottom: 15,
       },
-      activeTintColor: font_color.primary.main,
-      inactiveTintColor: '#888',
+      style:{
+        height:70,
+        padding:10,
+        backgroundColor: font_color.primary.main,
+      },
+
+      activeTintColor: font_color.primary.dark,
+      inactiveTintColor: font_color.common.white,
     }}
+    
   >
     {screens.map((screen) => (
       <Tab.Screen
