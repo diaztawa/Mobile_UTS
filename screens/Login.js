@@ -2,10 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
 import Constants from 'expo-constants';
 import useTheme from '../hooks/useTheme';
-import logo from '../assets/images/cover/002.jpg';
-import AuthContext from '../context/AuthContext';
-import { StatusBar } from 'expo-status-bar';
-
+import logo from '../assets/images/logo/mascot_logo.png';
+import bg1 from '../assets/images/background/bg1.png';
 
 const { font_color, font_size, radius } = useTheme();
 
@@ -61,34 +59,19 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function LoginScreen({navigation}) {
-  const {login} = React.useContext(AuthContext);
-  const [email, setEmail] = React.useState('');
+const LoginScreen = ({ navigation }) => {
+  const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [shown, setShown] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+  const [alert, setAlert] = React.useState(false);
 
-
-  // const AlertLogic = () => {
-  //   if (user === '' && password === '') {
-  //     setAlert(true);
-  //     return;
-  //   }
-  //   navigation.navigate('Main');
-  // };
-
-  async function LoginLogic(){
-    setLoading(true);
-    try{
-      await login({email, password});
-    } 
-      catch (err){
-        console.error(err);
-      }
-      finally{
-        setLoading(false);
-      }
-  }
+  const AlertLogic = () => {
+    if (user === '' && password === '') {
+      setAlert(true);
+      return;
+    }
+    navigation.navigate('Main');
+  };
 
   return(
     <View style={styles.container}>
@@ -118,26 +101,21 @@ export default function LoginScreen({navigation}) {
             </Text>
           </View>
 
-        <View style={{
-          padding: 24,
-          paddingTop: Constants.statusBarHeight,
-        }}
-        >
-
-          {/* {alert ? (
+          {alert ? (
             <View style={styles.alert}>
               <Text style={{ color: font_color.common.white }}>
                 Username dan password tidak boleh kosong!
               </Text>
             </View>
-          ) : null} */}
+          ) : null}
 
           <View style={{marginTop: -20}}>
             <TextInput
-              value={email}
-              onChangeText={(text) => setEmail(text)}
-              placeholder="Email"
-              style={[styles.input, { marginBottom: 12 }]}
+              value={user}
+              onChangeText={(text) => setUser(text)}
+              type="text"
+              placeholder="Masukkan Username"
+              style={[styles.input, { marginBottom: 8 }]}
             />
             <TextInput
               secureTextEntry={!shown}
@@ -155,8 +133,7 @@ export default function LoginScreen({navigation}) {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
-              loading = {loading}
-              onPress={LoginLogic}
+              onPress={AlertLogic}
             >
               <Text style={{ color: font_color.common.white, fontSize: font_size.size.md }}>Sign In</Text>
             </TouchableOpacity>
@@ -179,3 +156,5 @@ export default function LoginScreen({navigation}) {
     </View>
   );
 };
+
+export default LoginScreen;

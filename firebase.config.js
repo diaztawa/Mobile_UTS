@@ -1,7 +1,5 @@
-import { LogBox } from 'react-native';
 import firebase from 'firebase';
 import 'firebase/auth';
-import 'firebase/storage';
 
 // Optionally import the services that you want to use
 //import "firebase/auth";
@@ -25,7 +23,5 @@ const Config = {
 if (firebase.apps.length === 0) {
   firebase.initializeApp(Config);
 }
-
-LogBox.ignoreWarnings(['Setting a timer for a long period of time']);
 
 export default firebase;

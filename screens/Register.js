@@ -2,9 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
 import Constants from 'expo-constants';
 import useTheme from '../hooks/useTheme';
-import logo from '../assets/images/cover/006.jpg';
-import AuthContext from '../context/AuthContext';
-import { StatusBar } from 'expo-status-bar';
+import logo from '../assets/images/logo/mascot_logo.png';
+import bg1 from '../assets/images/background/bg1.png';
 
 const { font_color, font_size, radius } = useTheme();
 
@@ -57,38 +56,19 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function RegisterScreen({navigation}) {
-  const {register} = React.useContext(AuthContext);
-  const [email, setEmail] = React.useState('');
+const RegisterScreen = ({ navigation }) => {
+  const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [confirm, setConfirm] = React.useState('');
-  const [loading, setLoading] = React.useState(false);
-  const BackLogic = () => {
-    navigation.navigate('Login');
-  }
+  const [alert, setAlert] = React.useState(false);
 
-  // const AlertLogic = () => {
-  //   if (user === '' && password === '') {
-  //     setAlert(true);
-  //     return;
-  //   }
-  //   navigation.navigate('Login');
-  // };
-
-  async function RegisterLogic() {
-    setLoading(true);
-    try {
-      if (confirm !== password) {
-        setError(true);
-      } else {
-        await register({email, password});
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
+  const AlertLogic = () => {
+    if (user === '' && password === '') {
+      setAlert(true);
+      return;
     }
-  }
+    navigation.navigate('Login');
+  };
 
   return(
     <View style={styles.container}>
@@ -122,21 +102,21 @@ export default function RegisterScreen({navigation}) {
         }}
         >
           
-          {/* {alert ? (
+          {alert ? (
             <View style={styles.alert}>
               <Text style={{ color: font_color.common.white }}>
                 Username dan password tidak boleh kosong, konfirmasi password tidak boleh berbeda
               </Text>
             </View>
-          ) : null} */}
+          ) : null}
 
           <View>
             <TextInput
-              value={email}
-              onChangeText={(text) => setEmail(text)}
-              type="email"
-              placeholder="Email"
-              style={[styles.input]}
+              value={user}
+              onChangeText={(text) => setUser(text)}
+              type="text"
+              placeholder="Masukkan Username"
+              style={[styles.input, { marginBottom: 8 }]}
             />
             <TextInput
               secureTextEntry
@@ -160,9 +140,8 @@ export default function RegisterScreen({navigation}) {
               marginTop: 20
             }}>
             <TouchableOpacity
-              loading={loading}
               style={styles.button}
-              onPress={RegisterLogic}
+              onPress={AlertLogic}
             >
               <Text style={{ color: font_color.common.white, fontSize: font_size.size.sm }}>Register Now</Text>
             </TouchableOpacity>
@@ -181,3 +160,5 @@ export default function RegisterScreen({navigation}) {
     </View>
   );
 };
+
+export default RegisterScreen;

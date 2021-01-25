@@ -16,5 +16,24 @@ export default [
     name: 'Register',
     component: RegisterScreen,
     options: { headerShown: false },
-  }
+  },
+  {
+    name: 'Home',
+    component: HomeScreen,
+    options: { headerShown: false },
+  },
+  {
+    name: 'Main',
+    component: MainScreen,
+    options: { headerShown: false },
+  },
+  {
+    name: 'Details',
+    component: DetailsScreen,
+    options: { 
+      headerShown: false,
+      gestureEnabled: true,
+      cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+    },
+  },
 ];
