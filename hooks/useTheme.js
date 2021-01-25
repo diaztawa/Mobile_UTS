@@ -1,6 +1,6 @@
 module.exports = () => ({
     radius: {
-      pil: 100,
+      pil: 16,
       normal: 8,
       full: '100%',
     },

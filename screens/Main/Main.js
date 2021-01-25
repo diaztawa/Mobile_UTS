@@ -1,12 +1,20 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { FontAwesome } from '@expo/vector-icons';
-import screens from './index';
+import HomeScreen from './Home'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import useTheme from '../../hooks/useTheme';
+import { NavigationContainer } from '@react-navigation/native';
 
+const Drawer = createDrawerNavigator();
 const { font_color } = useTheme();
 
-const Tab = createBottomTabNavigator();
+const styles = StyleSheet.create({
+  iconButton: {
+    padding: 8,
+    borderRadius: 100,
+  },
+});
 
 const MainScreen = () => (
   <Tab.Navigator
@@ -44,5 +52,12 @@ const MainScreen = () => (
     ))}
   </Tab.Navigator>
 );
+
+    return(
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={HomeScreen} />
+      </Drawer.Navigator>
+    );
+  };
 
 export default MainScreen;
