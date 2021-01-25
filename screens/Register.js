@@ -98,7 +98,46 @@ const RegisterScreen = ({ navigation }) => {
             <Text style={{color: font_color.common.white, fontSize: font_size.size.sm}}>
               Only by Signing up
             </Text>
+          </View>
+          
+          {alert ? (
+            <View style={styles.alert}>
+              <Text style={{ color: font_color.common.white }}>
+                Username dan password tidak boleh kosong, konfirmasi password tidak boleh berbeda
+              </Text>
             </View>
+          ) : null}
+
+          <View>
+            <TextInput
+              value={user}
+              onChangeText={(text) => setUser(text)}
+              type="text"
+              placeholder="Masukkan Username"
+              style={[styles.input, { marginBottom: 8 }]}
+            />
+            <TextInput
+              secureTextEntry
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+              textContentType="password"
+              placeholder="Password"
+              style={[styles.input, { marginBottom: 8 }]}
+            />
+            <TextInput
+              secureTextEntry
+              value={confirm}
+              onChangeText={(text) => setConfirm(text)}
+              textContentType="password"
+              placeholder="Confirm Password"
+              style={[styles.input, { marginBottom: 8 }]}
+            />
+            <TouchableOpacity
+              style={styles.button}
+              onPress={AlertLogic}
+            >
+              <Text style={{ color: font_color.common.white }}>Register Now</Text>
+            </TouchableOpacity>
           </View>
         ) : null}
         <View>

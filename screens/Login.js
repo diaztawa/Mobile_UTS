@@ -70,7 +70,7 @@ const LoginScreen = ({ navigation }) => {
       setAlert(true);
       return;
     }
-    navigation.navigate('Login');
+    navigation.navigate('Main');
   };
 
   return(
@@ -98,31 +98,52 @@ const LoginScreen = ({ navigation }) => {
               Username dan password tidak boleh kosong!
             </Text>
           </View>
-        ) : null}
-        <View>
-          <TextInput
-            value={user}
-            onChangeText={(text) => setUser(text)}
-            type="text"
-            placeholder="Masukkan Username"
-            style={[styles.input, { marginBottom: 8 }]}
-          />
-          <TextInput
-            secureTextEntry={!shown}
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-            textContentType="password"
-            placeholder="Password"
-            style={styles.input}
-          />
-          <TouchableOpacity
-            style={{ marginTop: 8, marginBottom: 24 }}
-            onPress={() => setShown(!shown)}
-          >
-            <Text style={{ color: font_color.text.secondary }}>
-              {shown ? 'Hide' : 'Show'}
-              {' '}
-              password
+
+          {alert ? (
+            <View style={styles.alert}>
+              <Text style={{ color: font_color.common.white }}>
+                Username dan password tidak boleh kosong!
+              </Text>
+            </View>
+          ) : null}
+
+          <View>
+            <TextInput
+              value={user}
+              onChangeText={(text) => setUser(text)}
+              type="text"
+              placeholder="Masukkan Username"
+              style={[styles.input, { marginBottom: 8 }]}
+            />
+            <TextInput
+              secureTextEntry={!shown}
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+              textContentType="password"
+              placeholder="Password"
+              style={styles.input}
+            />
+            <TouchableOpacity
+              style={{ marginTop: 8, marginBottom: 24 }}
+              onPress={() => setShown(!shown)}
+            >
+              <Text style={{ color: font_color.text.secondary }}>
+                {shown ? 'Hide' : 'Show'}
+                {' '}
+                password
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={AlertLogic}
+            >
+              <Text style={{ color: font_color.common.white }}>Login</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={[styles.centered, styles.row]}>
+            <Text style={{ color: font_color.text.primary }}>
+              Belum punya akun?
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
