@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
-import { StyleSheet, View, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, ScrollView, TouchableOpacity, Image, Text } from 'react-native';
 import Constants from 'expo-constants';
 import MangaItem from '../../components/MangaItem';
 import useTheme from '../../hooks/useTheme';
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const HomeScreen = ({ navigation }) => (
+const ReadScreen = ({ navigation }) => (
   <View style={styles.container}>
 
     <View style={{
@@ -35,14 +35,16 @@ const HomeScreen = ({ navigation }) => (
     }}
     >
 
-      <View style={{
-        paddingVertical: 2,
-      }}>
-        <Image
-          style={styles.logo}
-          source={logo}
-        />
+      <View>
+          <TouchableOpacity style={styles.iconButton}>
+            <FontAwesome
+                name="users"
+                size={12}
+                style={{color: font_color.common.white}}
+            />
+          </TouchableOpacity>
       </View>
+
 
       <TouchableOpacity style={styles.iconButton}>
         <FontAwesome
@@ -63,4 +65,4 @@ const HomeScreen = ({ navigation }) => (
   </View>
 );
 
-export default HomeScreen;
+export default ReadScreen;
