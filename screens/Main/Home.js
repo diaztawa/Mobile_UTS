@@ -1,15 +1,12 @@
 import React from 'react';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { StyleSheet, View, ScrollView, TouchableOpacity, } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import { StyleSheet, View, ScrollView, TouchableOpacity, Image } from 'react-native';
 import Constants from 'expo-constants';
 import MangaItem from '../../components/MangaItem';
 import useTheme from '../../hooks/useTheme';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import logo from '../../assets/images/logo/name_logo.png'
 
-
-const { font_color } = useTheme();
-const Drawer = createDrawerNavigator();
+const { font_color, font_size } = useTheme();
 
 const styles = StyleSheet.create({
   container: {
@@ -17,68 +14,52 @@ const styles = StyleSheet.create({
     backgroundColor: font_color.common.white,
     paddingTop: Constants.statusBarHeight,
   },
+  logo: {
+    width: 150,
+    height: 35,
+  },
   iconButton: {
     padding: 8,
     borderRadius: 100,
-  },
-  title: {
-    fontSize: font_size.size.xl,
-    textAlign: 'center',
-    paddingVertical: 25,
-  },
-  buttonWrapper: {
-    alignItems: 'center',
-    marginTop: 7,
-    marginBottom: 5,
-  },
-  button: {
-    backgroundColor: font_color.primary.main,
-    paddingVertical: 10,
-    paddingHorizontal: 40,
-    borderRadius: 40
-  },
-  textButton: {
-      color: "#FFFFFF",
-      fontSize: 16,
   },
 });
 
 const HomeScreen = ({ navigation }) => (
   <View style={styles.container}>
+
     <View style={{
-      padding: 9,
+      padding: 5,
       flexDirection: 'row',
       justifyContent: 'space-between',
       backgroundColor: font_color.primary.main,
     }}
     >
-      <TouchableOpacity style={styles.iconButton}
-      onPress={() => navigation.openDrawer()}
-      >
-        <MaterialCommunityIcons
-          name="menu"
-          size={24}
-          style={{ color: font_color.common.white }}
+
+      <View style={{
+        paddingVertical: 2,
+      }}>
+        <Image
+          style={styles.logo}
+          source={logo}
         />
-      </TouchableOpacity>
+      </View>
+
       <TouchableOpacity style={styles.iconButton}>
-        <MaterialCommunityIcons
+        <FontAwesome
           name="bell"
           size={24}
           style={{ color: font_color.common.white }}
         />
       </TouchableOpacity>
+
     </View>
+
     <ScrollView style={{ paddingHorizontal: 24 }}>
       {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
         <MangaItem key={i} navigation={navigation} />
       ))}
-    <TouchableOpacity style={styles.buttonWrapper}>
-            <View style={styles.button}>
-            <Text style={styles.textButton}>More</Text>
-            </View>
-      </TouchableOpacity>
     </ScrollView>
+
   </View>
 );
 

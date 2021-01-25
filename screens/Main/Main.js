@@ -1,38 +1,23 @@
 import React from 'react';
-import HomeScreen from './Home'
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FontAwesome } from '@expo/vector-icons';
+import screens from './index';
 import useTheme from '../../hooks/useTheme';
-import { NavigationContainer } from '@react-navigation/native';
 
-const Drawer = createDrawerNavigator();
 const { font_color } = useTheme();
 
-const styles = StyleSheet.create({
-  iconButton: {
-    padding: 8,
-    borderRadius: 100,
-  },
-});
+const Tab = createBottomTabNavigator();
 
 const MainScreen = () => (
   <Tab.Navigator
     initialRouteName="Home"
     tabBarOptions={{
       labelStyle: {
-        marginBottom: 15,
+        marginBottom: 6,
       },
-      style:{
-        height:70,
-        padding:10,
-        backgroundColor: font_color.primary.main,
-      },
-
-      activeTintColor: font_color.primary.dark,
-      inactiveTintColor: font_color.common.white,
+      activeTintColor: font_color.primary.main,
+      inactiveTintColor: '#888',
     }}
-    
   >
     {screens.map((screen) => (
       <Tab.Screen
@@ -52,12 +37,5 @@ const MainScreen = () => (
     ))}
   </Tab.Navigator>
 );
-
-    return(
-      <Drawer.Navigator>
-        <Drawer.Screen name="Home" component={HomeScreen} />
-      </Drawer.Navigator>
-    );
-  };
 
 export default MainScreen;
